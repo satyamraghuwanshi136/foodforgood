@@ -23,31 +23,26 @@ public class OrganisationOffice {
 	private int organisation_office_id;
 	
 	@NotNull
-	@NotEmpty
 	@Column(name = "city", nullable = false)
 	private String city;
 
 	@NotNull
-	@NotEmpty
 	@Column(name = "state", nullable = false)
 	private String state;
 	
 	@NotNull
-	@NotEmpty
 	@Column(name = "address", nullable = false)
 	private String address;
 	
 	@NotNull
-	@NotEmpty
 	@Column(name = "poc_name", nullable = false)
 	private String poc_name;
 	
 	@NotNull
-	@NotEmpty
 	@Column(name = "poc_email", nullable = false)
 	private String poc_email;
 	
-	@NotEmpty
+
 	@NotNull
 	@JsonBackReference
 	@ManyToOne()
@@ -57,9 +52,9 @@ public class OrganisationOffice {
 	public OrganisationOffice() {
 	}
 
-	public OrganisationOffice(@NotNull @NotEmpty String city, @NotNull @NotEmpty String state,
-			@NotNull @NotEmpty String address, @NotNull @NotEmpty String poc_name, @NotNull @NotEmpty String poc_email,
-			@NotEmpty @NotNull OrganisationInformation organisation) {
+	public OrganisationOffice(@NotNull String city, @NotNull String state,
+			@NotNull String address, @NotNull String poc_name, @NotNull String poc_email,
+			@NotNull OrganisationInformation organisation) {
 		this.city = city;
 		this.state = state;
 		this.address = address;
@@ -122,6 +117,13 @@ public class OrganisationOffice {
 
 	public void setOrganisation(OrganisationInformation organisation) {
 		this.organisation = organisation;
+	}
+
+	@Override
+	public String toString() {
+		return "OrganisationOffice [organisation_office_id=" + organisation_office_id + ", city=" + city + ", state="
+				+ state + ", address=" + address + ", poc_name=" + poc_name + ", poc_email=" + poc_email
+				+ ", organisation=" + organisation + "]";
 	}
 	
 	

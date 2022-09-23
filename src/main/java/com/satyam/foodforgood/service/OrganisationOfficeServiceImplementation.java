@@ -1,5 +1,6 @@
 package com.satyam.foodforgood.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ public class OrganisationOfficeServiceImplementation implements OrganisationOffi
 
 	@Autowired
 	private OrganisationOfficeRepository officeRepository;
+	
+	
 
 	@Override
 	public OrganisationOffice findById(int id) {
@@ -33,14 +36,29 @@ public class OrganisationOfficeServiceImplementation implements OrganisationOffi
 
 	@Override
 	public OrganisationOffice update(int id, OrganisationOffice office) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<OrganisationOffice> data = officeRepository.findById(id);
+		
+		if(!data.isPresent()) {
+			throw new RuntimeException("Organisation Office with the given Id: " + id + " not found");
+		}
+		
+		return officeRepository.save(office);
 	}
 
 	@Override
 	public void deleteById(int id) {
-		// TODO Auto-generated method stub
+		Optional<OrganisationOffice> data = officeRepository.findById(id);
 		
+		if(!data.isPresent()) {
+			throw new RuntimeException("Organisation Office with the given Id: " + id + " not found");
+		}
+		
+		officeRepository.deleteById(id);
+	}
+
+	@Override
+	public List<OrganisationOffice> findAll() {
+		return officeRepository.findAll();
 	}
 	
 	

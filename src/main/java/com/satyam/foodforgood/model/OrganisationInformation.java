@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,31 +29,25 @@ public class OrganisationInformation {
 	@Column(name = "organisation_information_id")
 	private int organisation_information_id;
 	
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "Email can not be null")
 	@Email
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
-	@NotNull
-	@NotEmpty
-	@Min(4)
+	@NotNull(message = "Password can not be null")
 	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@NotNull
-	@NotEmpty
-	@Min(5)
+	@NotNull(message = "Name can not be null")
 	@Column(name = "name",unique = true, nullable = false)
 	private String name;
 	
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "website_link can not be null")
 	@Column(name = "website_link",unique = true, nullable = false)
 	private String website_link;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "organisation")
+	@OneToMany(fetch = FetchType.LAZY ,mappedBy = "organisation")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@Column(name = "offices")
 	private List<OrganisationOffice> offices;
@@ -61,8 +56,8 @@ public class OrganisationInformation {
 		
 	}
 
-	public OrganisationInformation(@NotNull @NotEmpty @Email String email, @NotNull @NotEmpty @Min(4) String password,
-			@NotNull @NotEmpty @Min(5) String name, @NotNull @NotEmpty String website_link,
+	public OrganisationInformation(@NotNull @Email String email, @NotNull @Min(4) String password,
+			@NotNull @Min(5) String name, @NotNull String website_link,
 			List<OrganisationOffice> offices) {
 		this.email = email;
 		this.password = password;
@@ -117,9 +112,8 @@ public class OrganisationInformation {
 
 	public void setOffices(List<OrganisationOffice> offices) {
 		this.offices = offices;
-	} 
-	
-	
+	}
+
 	
 	
 }

@@ -56,7 +56,9 @@ public class OrganisationOfficeController {
 	}
 	
 	@PutMapping("/{org_information_id}/{org_office_id}")
-	public OrganisationOffice saveOrganisationOffice(@RequestBody OrganisationOffice office, @PathVariable int org_information_id, @PathVariable int org_office_id) {
+	public OrganisationOffice saveOrganisationOffice(@RequestBody OrganisationOffice office, 
+					@PathVariable int org_information_id, @PathVariable int org_office_id) {
+		
 		OrganisationInformation data =  informationService.findById(org_information_id);
 		
 		if(data == null) {

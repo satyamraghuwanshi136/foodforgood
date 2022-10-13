@@ -3,6 +3,7 @@ package com.satyam.foodforgood.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,9 @@ import com.satyam.foodforgood.service.OrganisationInformationService;
 @RequestMapping("/api/organisationinformation")
 public class OrganisationInformationController {
 
+//	@Autowired
+//	public BCryptPasswordEncoder passwordEncoder;
+//	
 	@Autowired
 	OrganisationInformationService informationService;
 	
@@ -35,6 +39,7 @@ public class OrganisationInformationController {
 	
 	@PostMapping("/")	
 	public OrganisationInformation save(@RequestBody OrganisationInformation information) {
+//		information.setPassword(passwordEncoder.encode(information.getPassword()));
 		return informationService.save(information);
 	}
 	

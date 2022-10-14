@@ -38,6 +38,10 @@ public class OrganisationInformation {
 	@Column(name = "password", nullable = false)
 	private String password;
 	
+	@NotNull(message = "Role can not be null")
+	@Column(name = "role", nullable = false)
+	private String role;
+	
 	@NotNull(message = "Name can not be null")
 	@Column(name = "name",unique = true, nullable = false)
 	private String name;
@@ -61,6 +65,18 @@ public class OrganisationInformation {
 			List<OrganisationOffice> offices) {
 		this.email = email;
 		this.password = password;
+		this.name = name;
+		this.website_link = website_link;
+		this.offices = offices;
+	}
+
+	public OrganisationInformation(@NotNull @Email String email, @NotNull @Min(4) String password,
+			@NotNull String role,
+			@NotNull @Min(5) String name, @NotNull String website_link,
+			List<OrganisationOffice> offices) {
+		this.email = email;
+		this.password = password;
+		this.role = role;
 		this.name = name;
 		this.website_link = website_link;
 		this.offices = offices;
@@ -112,6 +128,14 @@ public class OrganisationInformation {
 
 	public void setOffices(List<OrganisationOffice> offices) {
 		this.offices = offices;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	

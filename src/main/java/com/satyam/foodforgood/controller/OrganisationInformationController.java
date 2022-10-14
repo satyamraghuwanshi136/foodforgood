@@ -21,9 +21,9 @@ import com.satyam.foodforgood.service.OrganisationInformationService;
 @RequestMapping("/api/organisationinformation")
 public class OrganisationInformationController {
 
-//	@Autowired
-//	public BCryptPasswordEncoder passwordEncoder;
-//	
+	@Autowired
+	public BCryptPasswordEncoder passwordEncoder;
+
 	@Autowired
 	OrganisationInformationService informationService;
 	
@@ -39,7 +39,7 @@ public class OrganisationInformationController {
 	
 	@PostMapping("/")	
 	public OrganisationInformation save(@RequestBody OrganisationInformation information) {
-//		information.setPassword(passwordEncoder.encode(information.getPassword()));
+		information.setPassword(passwordEncoder.encode(information.getPassword()));
 		return informationService.save(information);
 	}
 	

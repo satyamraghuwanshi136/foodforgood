@@ -1,4 +1,4 @@
-package config;
+package com.satyam.foodforgood.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class MySecurityConfig{
-	
+
 	@Bean
 	public UserDetailsService getUserDetailsService() {
 		return new UserDetailsServiceImplementation();
@@ -28,6 +28,11 @@ public class MySecurityConfig{
 		return new BCryptPasswordEncoder();
 	}
 	
+	@Bean
+	public AuthenticationManager authenticationManager(
+	        AuthenticationConfiguration authConfig) throws Exception {
+	    return authConfig.getAuthenticationManager();
+	}
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
@@ -41,14 +46,15 @@ public class MySecurityConfig{
 	
 	  @Bean
 	  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		  System.out.print("fajsbhcvsbahcbashbcjkasnsjklnkclsnak");
+		 
 		  http
 		  		.csrf().disable()
 		  		.cors()
 				.disable()
 		  		.authorizeRequests()
-		  		.antMatchers("/**", "/api/**").permitAll()
-		  		.antMatchers(HttpMethod.OPTIONS).permitAll()
+		  		.antMatchers(HttpMethod.POST, "/api/organisationinformation/").permitAll()
+		  		.antMatchers(HttpMethod.PUT, "/api/organisationinformation/**").permitAll()
+//		  		.antMatchers("/api/organisationinformation/**").hasRole("admin")
 		  		.anyRequest()
 		  		.authenticated()
 		  		.and()

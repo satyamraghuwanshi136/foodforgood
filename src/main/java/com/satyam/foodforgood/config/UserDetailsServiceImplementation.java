@@ -1,4 +1,4 @@
-package config;
+package com.satyam.foodforgood.config;
 
 import java.util.Optional;
 
